@@ -57,7 +57,7 @@ jobs:
           ./cruelbuild config                    \
                        os_patch_level=2023-03    \
                        model=${{ matrix.model }} \
-                       name=""                   \
+                       name="mcdicken"           \
                        toolchain=$TOOLCHAIN      \
                        fake_config               \
                        performance               \
