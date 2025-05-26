@@ -59,9 +59,9 @@ jobs:
                        model=${{ matrix.model }} \
                        name="mcdicken"           \
                        toolchain=$TOOLCHAIN      \
-                       fake_config               \
-                       performance               \
-                       noksm                     \
+                       +fake_config               \
+                       +performance               \
+                       +noksm                     \
                        -magisk                   \
                        +nohardening              \
                        +ttl                      \
