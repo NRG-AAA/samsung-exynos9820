@@ -1,7 +1,6 @@
 name: Build
 
-on:
-  workflow_dispatch:
+on: [push]
 
 env:
   TOOLCHAIN: cruel
@@ -57,9 +56,6 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
-                       +fake_config              \
-                       +performance              \
-                       +noksm                    \
                        +magisk                   \
                        +nohardening              \
                        +ttl                      \
@@ -68,7 +64,7 @@ jobs:
                        +sdfat                    \
                        +ntfs                     \
                        +force_dex_wqhd           \
-                       -morosound                \
+                       +morosound                \
                        +boeffla_wl_blocker       \
           2>&1 | tee config.info
       - name: Install gcc-aarch64-linux-gnu
