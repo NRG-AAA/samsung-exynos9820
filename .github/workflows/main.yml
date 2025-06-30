@@ -56,10 +56,10 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
                        +fake_config              \
                        +performance              \
                        +noksm                    \
+                       +magisk=v28.1             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
