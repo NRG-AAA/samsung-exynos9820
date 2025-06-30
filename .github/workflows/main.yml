@@ -54,10 +54,15 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
+                       os_patch_level=2025-06    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       -fp_boost                 \
+                       +fake_config              \
+                       +performance              \
+                       +noksm                    \
+                       +magisk=v29.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -65,7 +70,7 @@ jobs:
                        +sdfat                    \
                        +ntfs                     \
                        +force_dex_wqhd           \
-                       +morosound                \
+                       -morosound                \
                        +boeffla_wl_blocker       \
           2>&1 | tee config.info
 
