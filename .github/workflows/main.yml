@@ -55,7 +55,7 @@ jobs:
           ./cruelbuild config                    \
                        os_patch_level=2023-03    \
                        model=${{ matrix.model }} \
-                       name="Cruel-NRG-v2.5 "    \
+                       name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
                        +fake_config              \
                        +performance              \
