@@ -59,7 +59,6 @@ jobs:
                        name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
                        +fp_boost                 \
-                       +100hz                    \
                        +fake_config              \
                        +performance              \
                        +noksm                    \
