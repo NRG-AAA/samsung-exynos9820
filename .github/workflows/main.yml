@@ -56,9 +56,9 @@ jobs:
           ./cruelbuild config                    \
                        os_patch_level=2025-06    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
-                       +magisk=v29.0             \
+                       +magisk=v29               \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
