@@ -11,9 +11,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     strategy:
-      fail-fast: false
       matrix:
-        model: [ "G970F,G973F,G975F", "N975F" ]
+       model: [ "G973F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -55,9 +54,9 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-Matrix-v2.5"  \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       +magisk=v29.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -67,6 +66,7 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
+                       +100hz                    \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
