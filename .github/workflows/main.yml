@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G973F"]
+        model: [ "G975F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -55,9 +55,10 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="Cruel-selinux-permissive"        \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       +always_permit            \
+                       +magisk=v27.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
