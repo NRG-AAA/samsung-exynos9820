@@ -56,11 +56,11 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       +fp_boost                 \
+                       -fp_boost                 \
                        +fake_config              \
                        +performance              \
                        +noksm                    \
-                       +magisk                   \
+                       +magisk=v27.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
