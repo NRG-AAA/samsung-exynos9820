@@ -54,11 +54,12 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
+                       os_patch_level=2023-03    \
                        model=${{ matrix.model }} \
-                       name="Cruel-selinux-permissive"        \
+                       name="Cruel-NRG-v2.5"     \
                        toolchain=$TOOLCHAIN      \
                        +always_permit            \
-                       +magisk=v28.0             \
+                       +magisk=v27.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
