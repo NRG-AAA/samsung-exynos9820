@@ -1,6 +1,6 @@
 name: Build (Kitsune Fork)
 
-on: [workflow_dispatch]
+on: [push]
 
 env:
   TOOLCHAIN: cruel
