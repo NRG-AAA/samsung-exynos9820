@@ -1,7 +1,8 @@
 name: Build
 
 on: [push]
-
+# on:
+   #workflow_dispatch:
 env:
   TOOLCHAIN: cruel
   INSTALLER: yes
@@ -16,7 +17,7 @@ jobs:
         model: [ "G970F,G973F" ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.7'
@@ -60,7 +61,7 @@ jobs:
                        +fake_config              \
                        +performance              \
                        +noksm                    \
-                       -magisk=v27.0             \
+                       +magisk                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -86,7 +87,14 @@ jobs:
         run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
 
       - name: Kernel Build
-        run: ./cruelbuild :build
+        run: ./cruelbuild :build 2>&1 | tee build.log
+
+      - name: Upload Build Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Log-${{ matrix.model }}
+          path: build.log
+          if-no-files-found: error
 
       - name: Install mkbootimg
         run: |
