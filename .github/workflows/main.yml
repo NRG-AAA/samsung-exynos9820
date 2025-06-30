@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G975F" ]
+        model: [ "G973F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -58,7 +58,7 @@ jobs:
                        name="Cruel-selinux-permissive"        \
                        toolchain=$TOOLCHAIN      \
                        +always_permit            \
-                       +magisk=v27.0             \
+                       +magisk=v28.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
