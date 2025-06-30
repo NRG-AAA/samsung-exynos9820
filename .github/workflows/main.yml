@@ -49,6 +49,7 @@ jobs:
             ccache-${{ env.TOOLCHAIN }}-${{ steps.ccache_model_key.outputs.KEY }}-${{ steps.ccache_timestamp.outputs.MONTH_DATE }}
             ccache-${{ env.TOOLCHAIN }}-${{ steps.ccache_model_key.outputs.KEY }}-
             ccache-${{ env.TOOLCHAIN }}-
+			
       - name: Kernel Configure
         run: |
           set -e -o pipefail
@@ -70,9 +71,10 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
-					   +fp_boost                 \
-					   +100hz                    \
+		       +fp_boost                 \
+		       +100hz                    \
           2>&1 | tee config.info
+		  
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
         env:
@@ -106,6 +108,7 @@ jobs:
           wget -q https://android.googlesource.com/platform/external/avb/+archive/refs/heads/master.tar.gz -O - | tar xzf - avbtool.py
           chmod +x avbtool.py
           sudo mv avbtool.py /usr/local/bin/avbtool
+		  
       - name: Create CruelKernel images for ${{ matrix.model }}
         run: ./cruelbuild :mkimg
       - name: Create CruelKernel installer for ${{ matrix.model }}
