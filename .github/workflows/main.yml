@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G970F,G973F" ]
+        model: [ "G973F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +35,7 @@ jobs:
         run: |
           echo "::set-output name=FULL_DATE::$(date +'%Y-%m-%d')"
           echo "::set-output name=MONTH_DATE::$(date +'%Y-%m')"
+          
       - name: Create cache key from ${{ matrix.model }}
         id: ccache_model_key
         run: echo "::set-output name=KEY::$( echo ${{ matrix.model }} | tr ',' '_' )"
@@ -48,6 +49,7 @@ jobs:
             ccache-${{ env.TOOLCHAIN }}-${{ steps.ccache_model_key.outputs.KEY }}-${{ steps.ccache_timestamp.outputs.MONTH_DATE }}
             ccache-${{ env.TOOLCHAIN }}-${{ steps.ccache_model_key.outputs.KEY }}-
             ccache-${{ env.TOOLCHAIN }}-
+            
       - name: Kernel Configure
         run: |
           set -e -o pipefail
@@ -56,11 +58,7 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       -fp_boost                 \
-                       +fake_config              \
-                       +performance              \
-                       +noksm                    \
-                       +magisk=v27.0             \
+                       +magisk                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -68,9 +66,14 @@ jobs:
                        +sdfat                    \
                        +ntfs                     \
                        +force_dex_wqhd           \
-                       -morosound                \
+                       +morosound                \
                        +boeffla_wl_blocker       \
+                       -fp_boost                 \
+                       +fake_config              \
+                       +performance              \
+                       +noksm                    \
           2>&1 | tee config.info
+          
       - name: Install gcc-aarch64-linux-gnu
         if: env.TOOLCHAIN == 'system-gcc' || env.TOOLCHAIN == 'system-clang'
         env:
@@ -104,6 +107,7 @@ jobs:
           wget -q https://android.googlesource.com/platform/external/avb/+archive/refs/heads/master.tar.gz -O - | tar xzf - avbtool.py
           chmod +x avbtool.py
           sudo mv avbtool.py /usr/local/bin/avbtool
+          
       - name: Create CruelKernel images for ${{ matrix.model }}
         run: ./cruelbuild :mkimg
       - name: Create CruelKernel installer for ${{ matrix.model }}
