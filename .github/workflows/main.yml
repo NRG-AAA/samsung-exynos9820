@@ -58,7 +58,7 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       -magisk                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -68,11 +68,10 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
-                       -fp_boost                 \
-                       -fake_config              \
-                       -performance              \
-                       -noksm                    \
-                       -300hz                    \
+                       +fp_boost                 \
+                       +fake_config              \
+                       +performance              \
+                       +noksm                    \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
