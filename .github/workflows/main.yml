@@ -1,4 +1,4 @@
-name: Build (Kitsune Fork)
+name: Build
 
 on: [push]
 
@@ -59,7 +59,6 @@ jobs:
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
                        -magisk                   \
-                       +magisk=v27.2-kitsune-4   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -73,6 +72,7 @@ jobs:
                        +fake_config              \
                        +performance              \
                        +noksm                    \
+                       +kernelsu                 \
           2>&1 | tee config.info
           
       - name: Install gcc-aarch64-linux-gnu
