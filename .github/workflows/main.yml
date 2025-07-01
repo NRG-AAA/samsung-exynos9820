@@ -62,7 +62,7 @@ jobs:
                        +fake_config              \
                        +performance              \
                        +noksm                    \
-                       -magisk                   \
+                       +magisk                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
