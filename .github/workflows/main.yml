@@ -54,11 +54,11 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
-                       os_patch_level=2025-06    \
+                       os_patch_level=2025-07    \
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       +magisk=v27.0             \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
