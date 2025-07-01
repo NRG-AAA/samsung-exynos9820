@@ -58,11 +58,11 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       -fp_boost                 \
+                       +fp_boost                 \
                        +fake_config              \
                        +performance              \
                        +noksm                    \
-                       +magisk                   \
+                       -magisk                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -70,7 +70,7 @@ jobs:
                        +sdfat                    \
                        +ntfs                     \
                        +force_dex_wqhd           \
-                       -morosound                \
+                       +morosound                \
                        +boeffla_wl_blocker       \
           2>&1 | tee config.info
 
