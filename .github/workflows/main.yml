@@ -69,7 +69,7 @@ jobs:
                        -morosound                \
                        +boeffla_wl_blocker       \
                        +fp_boost                 \
-                       +fake_config              \
+                       -fake_config              \
                        +performance              \
                        +noksm                    \
           2>&1 | tee config.info
