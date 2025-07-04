@@ -9,11 +9,11 @@ ver="$(cat "$DIR/magisk_version" 2>/dev/null || echo -n 'none')"
 if [ "x$1" = "xcanary" ]
 then
 	nver="canary"
-	magisk_link="https://github.com/topjohnwu/magisk-files/raw/${nver}/app-debug.apk"
+	magisk_link="https://github.com/topjohnwu/Magisk/releases/tag/canary-29001/app-debug.apk"
 elif [ "x$1" = "xalpha" ]
 then
 	nver="alpha"
-	magisk_link="https://github.com/vvb2060/magisk_files/raw/${nver}/app-release.apk"
+	magisk_link="https://github.com/topjohnwu/Magisk/releases/tag/canary-29001/app-release.apk"
 else
 	dash='-'
 	if [ "x$1" = "x" ]; then
