@@ -6,7 +6,17 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 ver="$(cat "$DIR/magisk_version" 2>/dev/null || echo -n 'none')"
 
-if [ "x$1" = "xcanary" ]
+if [[ "x$1" =~ x.*delta ]]
+then
+	if [ "$1" = "delta" ]; then
+		nver="$(curl -s https://github.com/HuskyDG/magisk-files/releases | grep -m 1 -Poe 'v[0-9]{2}\.[0-9]{1}-kitsune-[0-9]{1}')"
+		
+		magisk_link="https://github.com/HuskyDG/magisk-files/releases/download/${nver}/${nver/v/}.apk"
+	elif [ "$1" = "delta-beta" ]; then
+		nver="$(curl -s https://github.com/HuskyDG/magisk-files/releases | grep -m 1 -Poe 'tree/[0-9]{10}' | grep -m 1 -Poe '[0-9]{10}')"
+		magisk_link="https://github.com/HuskyDG/magisk-files/releases/download/${nver}/app-release.apk"
+	fi
+elif [ "x$1" = "xcanary" ]
 then
 	nver="canary"
 	magisk_link="https://github.com/topjohnwu/magisk-files/raw/${nver}/app-debug.apk"
