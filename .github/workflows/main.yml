@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G970F,G973F" ]
+        model: [ "G970F,G973F,G975F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -54,11 +54,10 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
-                       os_patch_level=2025-03    \
                        model=${{ matrix.model }} \
-                       name="Cruel-NRG-AAA"      \
+                       name="Cruel-devel"        \
                        toolchain=$TOOLCHAIN      \
-                       -magisk                   \
+                       +magisk=delta-beta        \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -68,10 +67,6 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
-                       +fp_boost                 \
-                       -fake_config              \
-                       -performance              \
-                       -noksm                    \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
@@ -121,21 +116,21 @@ jobs:
           unzip ../CruelKernel.zip
       - name: Upload Kernel Zip
         if: env.INSTALLER == 'yes'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: CruelKernel-${{ matrix.model }}
           path: installer/*
           if-no-files-found: error
       - name: Upload Kernel Images
         if: env.INSTALLER != 'yes'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: CruelKernel-${{ matrix.model }}
           path: '*.img'
           if-no-files-found: error
 
       - name: Upload Kernel Info
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: ConfigurationInfo-${{ matrix.model }}
           path: config.*
