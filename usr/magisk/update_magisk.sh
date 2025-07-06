@@ -15,6 +15,9 @@ then
 	elif [ "$1" = "delta-beta" ]; then
 		nver="$(curl -s https://github.com/HuskyDG/magisk-files/releases | grep -m 1 -Poe 'tree/[0-9]{10}' | grep -m 1 -Poe '[0-9]{10}')"
 		magisk_link="https://github.com/HuskyDG/magisk-files/releases/download/${nver}/app-release.apk"
+	elif [ "$1" = "delta-1q23lyc45" ]; then
+		nver="$(curl -s https://github.com/1q23lyc45/KitsuneMagisk/releases | grep -m 1 -Poe 'v[0-9]+\.[0-9]+-[a-z0-9-]+' | head -n 1)"
+		magisk_link="https://github.com/1q23lyc45/KitsuneMagisk/releases/download/${nver}/app-release.apk"
 	fi
 elif [ "x$1" = "xcanary" ]
 then
@@ -48,22 +51,22 @@ then
 		mv -f "$DIR/arm/magiskinit64" "$DIR/magiskinit"
 		: > "$DIR/magisk32.xz"
 		: > "$DIR/magisk64.xz"
-	elif unzip -o "$DIR/magisk.zip" lib/armeabi-v7a/libmagiskinit.so lib/armeabi-v7a/libmagisk.so lib/armeabi-v7a/libmagisk.so -d "$DIR"; then
+	elif unzip -o "$DIR/magisk.zip" lib/armeabi-v7a/libmagiskinit.so lib/armeabi-v7a/libmagisk32.so lib/armeabi-v7a/libmagisk64.so -d "$DIR"; then
 		mv -f "$DIR/lib/armeabi-v7a/libmagiskinit.so" "$DIR/magiskinit"
-		mv -f "$DIR/lib/armeabi-v7a/libmagisk.so" "$DIR/magisk32"
-		mv -f "$DIR/lib/armeabi-v7a/libmagisk.so" "$DIR/magisk64"
+		mv -f "$DIR/lib/armeabi-v7a/libmagisk32.so" "$DIR/magisk32"
+		mv -f "$DIR/lib/armeabi-v7a/libmagisk64.so" "$DIR/magisk64"
 		xz --force --check=crc32 "$DIR/magisk32" "$DIR/magisk64"
-	elif unzip -o "$DIR/magisk.zip" lib/arm64-v8a/libmagiskinit.so lib/armeabi-v7a/libmagisk.so lib/arm64-v8a/libmagisk.so assets/stub.apk -d "$DIR"; then
+	elif unzip -o "$DIR/magisk.zip" lib/arm64-v8a/libmagiskinit.so lib/armeabi-v7a/libmagisk32.so lib/arm64-v8a/libmagisk64.so assets/stub.apk -d "$DIR"; then
 		mv -f "$DIR/lib/arm64-v8a/libmagiskinit.so" "$DIR/magiskinit"
-		mv -f "$DIR/lib/armeabi-v7a/libmagisk.so" "$DIR/magisk32"
-		mv -f "$DIR/lib/arm64-v8a/libmagisk.so" "$DIR/magisk64"
+		mv -f "$DIR/lib/armeabi-v7a/libmagisk32.so" "$DIR/magisk32"
+		mv -f "$DIR/lib/arm64-v8a/libmagisk64.so" "$DIR/magisk64"
 		mv -f "$DIR/assets/stub.apk" "$DIR/stub"
 		xz --force --check=crc32 "$DIR/magisk32" "$DIR/magisk64" "$DIR/stub"
 	else
-		unzip -o "$DIR/magisk.zip" lib/arm64-v8a/libmagiskinit.so lib/armeabi-v7a/libmagisk.so lib/arm64-v8a/libmagisk.so -d "$DIR"
+		unzip -o "$DIR/magisk.zip" lib/arm64-v8a/libmagiskinit.so lib/armeabi-v7a/libmagisk32.so lib/arm64-v8a/libmagisk64.so -d "$DIR"
 		mv -f "$DIR/lib/arm64-v8a/libmagiskinit.so" "$DIR/magiskinit"
-		mv -f "$DIR/lib/armeabi-v7a/libmagisk.so" "$DIR/magisk32"
-		mv -f "$DIR/lib/arm64-v8a/libmagisk.so" "$DIR/magisk64"
+		mv -f "$DIR/lib/armeabi-v7a/libmagisk32.so" "$DIR/magisk32"
+		mv -f "$DIR/lib/arm64-v8a/libmagisk64.so" "$DIR/magisk64"
 		xz --force --check=crc32 "$DIR/magisk32" "$DIR/magisk64"
 	fi
 	echo -n "$nver" > "$DIR/magisk_version"
