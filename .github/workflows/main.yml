@@ -58,7 +58,7 @@ jobs:
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
-                       -magisk                   \
+                       +magisk=delta-1q23lyc45   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -72,8 +72,8 @@ jobs:
                        -fake_config              \
                        -performance              \
                        -noksm                    \
-                       +overlayfs                \
-                       +kernelsu                 \
+                       -overlayfs                \
+                       -kernelsu                 \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
