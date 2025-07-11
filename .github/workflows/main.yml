@@ -73,6 +73,8 @@ jobs:
                        -fake_config              \
                        -performance              \
                        -noksm                    \
+                       +dtb                      \
+                       +empty_vbmeta             \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
