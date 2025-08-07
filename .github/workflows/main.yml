@@ -54,7 +54,7 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
-                       os_patch_level=2025-03    \
+                       os_patch_level=2023-03    \
                        model=${{ matrix.model }} \
                        name="Cruel-NRG-AAA"      \
                        toolchain=$TOOLCHAIN      \
@@ -68,10 +68,12 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
+                       +overlayfs                \
                        +fp_boost                 \
                        -fake_config              \
                        -performance              \
                        -noksm                    \
+                       +apatch                   \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
